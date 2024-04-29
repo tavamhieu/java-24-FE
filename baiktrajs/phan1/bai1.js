@@ -14,4 +14,4 @@ function getStringHasMaxLength(strings) {
 }
 
 // Ví dụ sử dụng:
-console.log(getStringHasMaxLength(['aba', 'aa', 'ad', 'c', 'vcd'])); // Output: ['aba', 'vcd']
+console.log(getStringHasMaxLength(['aba', 'aa', 'ad', 'c', 'vcd'])); 
