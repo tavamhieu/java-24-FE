@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title> Product Details</title>
+</head>
+<body>
+<a th:href="@{/}">Quay lại trang chủ</a>
+
+<h1>Product Details</h1>
+<div>
+    <img th:src="${product.thumbnail}" alt="Thumbnail" width="150"/>
+    <h2 th:text="${product.name}">Product Name</h2>
+    <p th:text="${product.description}">Product Description</p>
+    <p>Price: <span th:text="${product.price}">100</span></p>
+    <p>Rating: <span th:text="${product.rating}">5.0</span></p>
+    <p>Discount Price: <span th:text="${product.priceDiscount}">80</span></p>
+</div>
+</body>
+</html>

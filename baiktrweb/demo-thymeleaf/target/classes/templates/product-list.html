@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        .disabled {
+            pointer-events: none;
+            cursor: not-allowed;
+            background-color: #ccc;
+        }
+
+        .active {
+            background-color: darkorange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Product List</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Thumbnail</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Price Discount</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}">1</td>
+        <td th:text="${product.name}">Product Name</td>
+        <td th:text="${product.description}">Product Description</td>
+        <td><img th:src="${product.thumbnail}" alt="Thumbnail" width="50"/></td>
+        <td th:text="${product.price}">100</td>
+        <td th:text="${product.rating}">5.0</td>
+        <td th:text="${product.priceDiscount}">80</td>
+        <td><a th:href="@{/products/{id}(id=${product.id})}">View Details</a></td>
+    </tr>
+    </tbody>
+</table>
+<div>
+    <button th:classappend="${pageData.getCurrentPage() == 1 ? 'disabled' : ''}">
+        <a th:href="@{/products?page={page} (page=${pageData.getCurrentPage() - 1})}">Trang trước</a>
+    </button>
+    <button th:each="number : ${#numbers.sequence(1, pageData.getTotalPages())}"
+            th:classappend="${pageData.getCurrentPage() == number ? 'active' : ''}">
+        <a th:href="@{/products?page={page} (page=${number})}" th:text="${number}">1</a>
+    </button>
+    <button th:classappend="${pageData.getCurrentPage() == pageData.getTotalPages() ? 'disabled' : ''}">
+        <a th:href="@{/products?page={page} (page=${pageData.getCurrentPage() + 1})}">Trang sau</a>
+    </button>
+</div>
+</body>
+</html>
