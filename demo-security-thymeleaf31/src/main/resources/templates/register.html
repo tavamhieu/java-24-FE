@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang Đăng Ký</title>
+</head>
+<body>
+<h1>Trang Đăng Ký</h1>
+
+<form id="form-register">
+    <div>
+        <label for="register-email">Email:</label>
+        <input type="text" id="register-email"/>
+    </div>
+    <div>
+        <label for="register-password">Mật khẩu:</label>
+        <input type="password" id="register-password"/>
+    </div>
+    <button type="submit">Đăng ký</button>
+</form>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    const formRegisterEl = document.getElementById('form-register');
+    const emailRegisterEl = document.getElementById('register-email');
+    const passwordRegisterEl = document.getElementById('register-password');
+    formRegisterEl.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const email = emailRegisterEl.value;
+        const password = passwordRegisterEl.value;
+        const data = {
+            email,
+            password
+        };
+        try {
+            const response = await axios.post('/api/auth/register', data);
+            if (response.status === 200) {
+                alert('Đăng ký thành công');
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
+            }
+        } catch (error) {
+            alert(error.response.data.message);
+        }
+    });
+</script>
+</body>
+</html>
